@@ -90,16 +90,15 @@ class ProductController extends Controller
             'name' => 'required',
             'price' => 'required|numeric',
             'description' => 'required',
-            // Gambar tidak wajib diisi saat edit (nullable)
+
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $product = Product::find($id);
         $input = $request->all();
 
-        // Cek jika ada upload gambar baru
+
         if ($image = $request->file('image')) {
-            // Hapus gambar lama agar server tidak penuh
             if(File::exists(public_path($product->image))){
                 File::delete(public_path($product->image));
             }
@@ -124,23 +123,21 @@ class ProductController extends Controller
     {
         $products = Product::all();
 
-        // Cek apakah hari ini Kamis?
 
         if (now()->isThursday()) {
             foreach ($products as $product) {
-                // Simpan harga asli untuk dicoret (optional, buat properti dinamis)
+
                 $product->original_price = $product->price;
 
                 // Terapkan Diskon (Misal: Potongan 10%)
                 // Rumus: Harga * 0.9
                 $product->price = $product->price * 0.90;
 
-                // Tandai bahwa produk ini sedang diskon
                 $product->has_discount = true;
             }
         }
 
-        return view('sewa', compact('products')); // Pastikan nama view sesuai (sewa.blade.php / public-list.blade.php)
+        return view('sewa', compact('products'));
     }
 
 

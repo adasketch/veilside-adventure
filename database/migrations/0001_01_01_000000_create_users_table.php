@@ -14,7 +14,7 @@ public function up(): void
     Schema::create('users', function (Blueprint $table) {
         $table->id();
         $table->string('name'); // Nama lengkap
-        $table->string('username')->unique(); // Untuk login (adminveil)
+        $table->string('username')->unique(); // Untuk login (adminveilside)
         $table->string('email')->unique()->nullable(); // Opsional
         $table->string('password'); // Password terenkripsi
         $table->enum('role', ['admin', 'user'])->default('user'); // Pembeda hak akses

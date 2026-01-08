@@ -112,7 +112,7 @@ function addToCart(index) {
     const existingItem = cart.find((c) => c.name === item.name);
 
     if (existingItem) {
-        existingItem.qty += 1; // Jika ada, tambah qty
+        existingItem.qty += 1; // tambah qty
 
         // Update harga di cart jika ada perubahan harga (misal dari normal ke diskon)
         existingItem.price = item.price;
